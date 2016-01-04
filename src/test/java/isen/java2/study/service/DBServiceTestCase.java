@@ -3,6 +3,7 @@ package isen.java2.study.service;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import isen.java2.study.data.Person;
 import isen.java2.study.data.Sex;
+import isen.java2.study.data.stat.Stat;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;

@@ -1,11 +1,15 @@
 package isen.java2.study.service.util;
 
 import isen.java2.study.data.Person;
+import isen.java2.study.data.Sex;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VCardReader {
@@ -31,25 +35,41 @@ public class VCardReader {
     }
 
     private static List<String> getAllLines(Path path) throws IOException {
-        // TODO return all lines of the file described in "path" parameter
-        return null;
+        BufferedReader fileReader = Files.newBufferedReader(path);
+        List<String> result = new ArrayList<>();
+        String line;
+
+        while ((line = fileReader.readLine()) != null) {
+            result.add(line);
+        }
+
+        return result;
     }
 
     private static Person parseN(Person person, String line) {
-        // TODO if line begins with "N:", then split the line with ";" separator
-        // TODO the first element is the lastName, the second is the first name
-        // TODO if the fourth element is equal to "Mr", set the sex to Sex.MALE,
-        // Sex.FEMALE otherwise
-        // TODO return the person you got as parameter, with the new values
-        // inside
+        if (line.substring(0, 2).equals("N:")) {
+
+            String lineLeft = line.substring(2);
+
+            String[] split = lineLeft.split(";");
+
+            person.setLastName(split[0]);
+            person.setFirstName(split[1]);
+
+            if (split[3].equals("Mr")) {
+                person.setSex(Sex.MALE);
+            } else {
+                person.setSex(Sex.FEMALE);
+            }
+        }
         return person;
     }
 
     private static Person parseEmail(Person person, String line) {
-        // TODO if line begins with "EMAIL:", apply the correct substring to
-        // retrieve the email
-        // TODO return the person you got as parameter, with the new values
-        // inside
+        if (line.substring(0, 6).equals("EMAIL:")) {
+            String lineLeft = line.substring(6);
+            person.setEmail(lineLeft);
+        }
         return person;
     }
 
@@ -61,6 +81,14 @@ public class VCardReader {
         // TODO the fifth element is the state
         // TODO return the person you got as parameter, with the new values
         // inside
+        if (line.substring(0, 4).equals("ADR:")) {
+
+            String lineLeft = line.substring(4);
+
+            String[] split = lineLeft.split(";");
+
+            // TODO use the splat values
+        }
         return person;
     }
 
