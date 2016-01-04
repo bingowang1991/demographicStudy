@@ -1,5 +1,9 @@
 package isen.java2.study;
 
+import isen.java2.study.service.DBService;
+import isen.java2.study.service.StatService;
+import isen.java2.study.service.VCardRecorderService;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -7,7 +11,12 @@ import java.util.Properties;
 public class Application {
 
     public static void main(String[] args) {
+        Properties properties = loadProperties();
+        DBService dbService = new DBService(properties);
+        VCardRecorderService vCardRecorderService = new VCardRecorderService(dbService, properties);
+        StatService statService = new StatService(dbService);
 
+        vCardRecorderService.readAndSaveCards();
     }
 
     private static Properties loadProperties() {

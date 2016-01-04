@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class VCardReader {
     }
 
     private static Person parseN(Person person, String line) {
-        if (line.substring(0, 2).equals("N:")) {
+        if (line.length() > 2 && line.substring(0, 2).equals("N:")) {
 
             String lineLeft = line.substring(2);
 
@@ -66,7 +67,7 @@ public class VCardReader {
     }
 
     private static Person parseEmail(Person person, String line) {
-        if (line.substring(0, 6).equals("EMAIL:")) {
+        if (line.length() > 6 && line.substring(0, 6).equals("EMAIL:")) {
             String lineLeft = line.substring(6);
             person.setEmail(lineLeft);
         }
@@ -81,13 +82,14 @@ public class VCardReader {
         // TODO the fifth element is the state
         // TODO return the person you got as parameter, with the new values
         // inside
-        if (line.substring(0, 4).equals("ADR:")) {
+        if (line.length() > 4 && line.substring(0, 4).equals("ADR:")) {
 
             String lineLeft = line.substring(4);
 
             String[] split = lineLeft.split(";");
-
-            // TODO use the splat values
+            person.setStreetName(split[2]);
+            person.setCity(split[3]);
+            person.setState(split[4]);
         }
         return person;
     }
@@ -97,6 +99,9 @@ public class VCardReader {
         // LocalDate.parse() and the given formatter
         // TODO return the person you got as parameter, with the new values
         // inside
+        if (line.length() > 5 && line.substring(0, 5).equals("BDAY:")) {
+            person.setDateOfBirth(LocalDate.parse(line.substring(5), formatter));
+        }
         return person;
     }
 
@@ -105,6 +110,9 @@ public class VCardReader {
         // to retrieve the email
         // TODO return the person you got as parameter, with the new values
         // inside
+        if (line.length() > 11 && line.substring(0, 11).equals("CATEGORIES:")) {
+            person.setBloodType(line.substring(11));
+        }
         return person;
     }
 

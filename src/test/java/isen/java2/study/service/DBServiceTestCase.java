@@ -70,6 +70,7 @@ public class DBServiceTestCase {
                 "tony@shield.org", LocalDate.of(1965, 4, 4), "AB+");
         // WHEN
         dbService.save(person);
+
         // THEN
         verify(connectionMock).prepareStatement(eq(query));
         verify(statementMock).setString(eq(1), eq("Stark"));
