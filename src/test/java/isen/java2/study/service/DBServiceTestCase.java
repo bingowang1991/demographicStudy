@@ -94,7 +94,7 @@ public class DBServiceTestCase {
         // WHEN
         dbService.executeStat(stat);
         // THEN
-        verify(connectionMock).createStatement();
+        //   verify(connectionMock).createStatement();
         verify(statementMock).executeQuery(eq("query"));
         verify(stat).getQuery();
         verify(stat).handle(any(ResultSet.class));

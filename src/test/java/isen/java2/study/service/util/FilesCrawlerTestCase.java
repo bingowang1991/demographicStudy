@@ -28,7 +28,7 @@ public class FilesCrawlerTestCase {
     @Test
     public void shouldListVCards() {
         URL vcardURL = this.getClass().getClassLoader().getResource("directory");
-        List<Path> result = FilesCrawler.getFiles(vcardURL.toString());
+        List<Path> result = FilesCrawler.getFiles(vcardURL.getPath());
         assertThat(result).hasSize(2);
     }
 }

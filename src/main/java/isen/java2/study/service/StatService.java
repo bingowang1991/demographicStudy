@@ -16,9 +16,7 @@ public class StatService {
 
     public void printStats(List<Stat> stats) {
         for (Stat stat : stats) {
-            System.out.println("\n\n=====");
-            // TODO print unknown things bout stat
-            System.out.println("=====");
+            System.out.println("\n\n=====\n" + stat.getDescription() + "\n=====");
             dbService.executeStat(stat);
         }
     }
