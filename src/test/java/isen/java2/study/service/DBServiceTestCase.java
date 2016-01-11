@@ -94,8 +94,8 @@ public class DBServiceTestCase {
         // WHEN
         dbService.executeStat(stat);
         // THEN
-        //   verify(connectionMock).createStatement();
-        verify(statementMock).executeQuery(eq("query"));
+        verify(connectionMock).prepareStatement(eq("query"));
+        verify(statementMock).executeQuery();
         verify(stat).getQuery();
         verify(stat).handle(any(ResultSet.class));
 
@@ -108,8 +108,7 @@ public class DBServiceTestCase {
         properties.setProperty("db.username", "userValue");
         properties.setProperty("db.password", "s3cr3T");
         properties.setProperty("db.schema", "schemaValue");
-        DBService dbService = new DBService(properties);
-        return dbService;
+        return new DBService(properties);
     }
 
     private DBService mockDataSource(DBService dbService) throws Exception {

@@ -8,20 +8,16 @@ import java.sql.SQLException;
  */
 public class AverageAgeByState implements Stat {
 
-    private final String QUERY = "SELECT state, AVG(YEAR(CURRENT_TIMESTAMP) - YEAR(dateofbirth) - " +
-            "(RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(dateofbirth, 5))) as age FROM person" +
-            " GROUP BY state  ORDER BY age DESC";
-
-    private final String DESCRIPTION = "Gives the age average of each state.";
-
     @Override
     public String getQuery() {
-        return QUERY;
+        return "SELECT state, AVG(YEAR(CURRENT_TIMESTAMP) - YEAR(dateofbirth) - " +
+                "(RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(dateofbirth, 5))) as age FROM person" +
+                " GROUP BY state  ORDER BY age DESC";
     }
 
     @Override
     public String getDescription() {
-        return DESCRIPTION;
+        return "Gives the age average of each state.";
     }
 
     @Override

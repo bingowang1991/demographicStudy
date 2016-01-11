@@ -8,18 +8,14 @@ import java.sql.SQLException;
  */
 public class MostCommonBloodType implements Stat {
 
-    private final String QUERY = "SELECT bloodtype, count(id) as total FROM person GROUP BY bloodtype ORDER BY total DESC";
-
-    private final String DESCRIPTION = "Gives the most common blood type among all people stored in the database";
-
     @Override
     public String getQuery() {
-        return QUERY;
+        return "SELECT bloodtype, count(id) as total FROM person GROUP BY bloodtype ORDER BY total DESC";
     }
 
     @Override
     public String getDescription() {
-        return DESCRIPTION;
+        return "Gives the most common blood type among all people stored in the database";
     }
 
     @Override

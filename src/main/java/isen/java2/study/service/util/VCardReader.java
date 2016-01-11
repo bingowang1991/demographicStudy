@@ -75,13 +75,6 @@ public class VCardReader {
     }
 
     private static Person parseAddress(Person person, String line) {
-        // TODO if line begins with "ADR:", then split the line with ";"
-        // separator
-        // TODO the third element is the streetName
-        // TODO the fourth element is the city
-        // TODO the fifth element is the state
-        // TODO return the person you got as parameter, with the new values
-        // inside
         if (line.length() > 4 && line.substring(0, 4).equals("ADR:")) {
 
             String lineLeft = line.substring(4);
@@ -95,10 +88,6 @@ public class VCardReader {
     }
 
     private static Person parseDateOfBirth(Person person, String line) throws ParseException {
-        // TODO if line begins with "BDAY:", parse the date thanks to
-        // LocalDate.parse() and the given formatter
-        // TODO return the person you got as parameter, with the new values
-        // inside
         if (line.length() > 5 && line.substring(0, 5).equals("BDAY:")) {
             person.setDateOfBirth(LocalDate.parse(line.substring(5), formatter));
         }
@@ -106,10 +95,6 @@ public class VCardReader {
     }
 
     private static Person parseBloodType(Person person, String line) {
-        // TODO if line begins with "CATEGORIES:", apply the correct substring
-        // to retrieve the email
-        // TODO return the person you got as parameter, with the new values
-        // inside
         if (line.length() > 11 && line.substring(0, 11).equals("CATEGORIES:")) {
             person.setBloodType(line.substring(11));
         }

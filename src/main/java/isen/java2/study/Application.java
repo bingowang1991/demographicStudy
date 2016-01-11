@@ -22,6 +22,9 @@ public class Application {
         VCardRecorderService vCardRecorderService = new VCardRecorderService(dbService, properties);
         StatService statService = new StatService(dbService);
 
+        System.out.println("Saving the data, please wait a moment...");
+        //vCardRecorderService.readAndSaveCards();
+
         List<Stat> stats = new ArrayList<>();
         stats.add(new AverageAgeByState());
         stats.add(new MostCommonBloodType());
@@ -29,10 +32,9 @@ public class Application {
 
         statService.printStats(stats);
 
-        vCardRecorderService.readAndSaveCards();
     }
 
-    private static Properties loadProperties() {
+    public static Properties loadProperties() {
         System.out.println("Loading properties...");
         Properties properties = new Properties();
         InputStream fileStream = Application.class.getClassLoader().getResourceAsStream("application.properties");

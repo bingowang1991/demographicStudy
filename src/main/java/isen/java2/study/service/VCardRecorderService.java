@@ -22,8 +22,12 @@ public class VCardRecorderService {
     public void readAndSaveCards() {
         List<Path> paths = FilesCrawler.getFiles(properties.getProperty("vcards.folder"));
 
+        if (paths == null) {
+            return;
+        }
         for (Path path : paths) {
             dbService.save(VCardReader.read(path));
         }
+
     }
 }

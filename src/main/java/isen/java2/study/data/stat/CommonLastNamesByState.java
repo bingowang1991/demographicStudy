@@ -8,23 +8,23 @@ import java.sql.SQLException;
  */
 public class CommonLastNamesByState implements Stat {
 
-    private final String DESCRIPTION = "Gives the most common blood type among all people stored in the database";
     private int numberOfOccurrences;
-    private final String QUERY = "SELECT lastname, state, count(id) as total FROM person GROUP BY\n" +
-            "state,lastname HAVING total > " + numberOfOccurrences + " ORDER BY total DESC, state";
+    private String query;
 
     public CommonLastNamesByState(int numberOfOccurrences) {
         this.numberOfOccurrences = numberOfOccurrences;
+        query = "SELECT lastname, state, count(id) as total FROM person GROUP BY " +
+                "state,lastname HAVING total > " + this.numberOfOccurrences + " ORDER BY total DESC, state";
     }
 
     @Override
     public String getQuery() {
-        return QUERY;
+        return query;
     }
 
     @Override
     public String getDescription() {
-        return DESCRIPTION;
+        return "Gives the most common blood type among all people stored in the database";
     }
 
     @Override
